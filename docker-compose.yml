@@ -1,0 +1,30 @@
+version: '3'
+services:
+  php:
+    build: .
+    ports:
+      - "9000:9000"
+    volumes:
+      - "./:/var/www/html"
+    command: php -S 0.0.0.0:9000 -t /var/www/html
+    networks:
+      - exercicio-pedro
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: exercicio
+      MYSQL_USER: pedro
+      MYSQL_PASSWORD: gay
+    ports:
+      - "3306:3306"
+    volumes:
+      - exercicio:/var/lib/mysql
+    networks:
+      - exercicio-pedro
+volumes:
+  exercicio:
+
+networks:
+  exercicio-pedro:
